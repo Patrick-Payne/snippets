@@ -17,10 +17,10 @@
  *  @pre: All elements from 0, ..., numElements are valid, i.e. array is packed
  *        to the left with no empty places.
  */
-void sortIntArray(int array[], int numElements) {
-  assert(numElements >= 0);
+void SortIntArray(int array[], int num_elements) {
+  assert(num_elements >= 0);
 
-  for (int i = 0; i < numElements; i++) {
+  for (int i = 0; i < num_elements; i++) {
     // Get the leftmost unsorted element to insert into the sorted subarray.
     int leftmost_unsorted_int = array[i];
 

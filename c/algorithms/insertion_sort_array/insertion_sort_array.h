@@ -15,7 +15,7 @@
  *  @pre: All elements from 0, ..., numElements are valid, i.e. array is packed
  *        to the left with no empty places.
  */
-void sortIntArray(int array[], int numElements);
+void SortIntArray(int array[], int num_elements);
 
 
 #endif /* SNIPPET_INSERTION_SORT_ARRAY_H_ */

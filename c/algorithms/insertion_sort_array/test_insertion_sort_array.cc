@@ -15,9 +15,9 @@ extern "C" {
  * Test sort_int_array()
  *****************************************************************************/ 
 // Test case where list is already sorted.
-TEST(SortIntArrayTest, sorted) {
+TEST(SortIntArrayTest, Sorted) {
   int test_array[] = {0, 1, 2, 3, 4, 5};
-  sortIntArray(test_array, 6);
+  SortIntArray(test_array, 6);
 
   EXPECT_EQ(test_array[0], 0);
   EXPECT_EQ(test_array[1], 1);
@@ -28,9 +28,9 @@ TEST(SortIntArrayTest, sorted) {
 }
 
 // Test case where there is only one mismatch.
-TEST(SortIntArrayTest, oneMismatch) {
+TEST(SortIntArrayTest, OneMismatch) {
   int test_array[] = {0, 1, 3, 2, 4, 5};
-  sortIntArray(test_array, 6);
+  SortIntArray(test_array, 6);
 
   EXPECT_EQ(test_array[0], 0);
   EXPECT_EQ(test_array[1], 1);
@@ -41,9 +41,9 @@ TEST(SortIntArrayTest, oneMismatch) {
 }
 
 // Test case where we have reverse order
-TEST(SortIntArrayTest, reverseSort) {
+TEST(SortIntArrayTest, ReverseSort) {
   int test_array[] = {5, 4, 3, 2, 1, 0};
-  sortIntArray(test_array, 6);
+  SortIntArray(test_array, 6);
 
   EXPECT_EQ(test_array[0], 0);
   EXPECT_EQ(test_array[1], 1);

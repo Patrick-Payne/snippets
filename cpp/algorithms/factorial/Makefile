@@ -73,4 +73,4 @@ test_factorial.o : $(USER_DIR)/test_factorial.cc \
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/test_factorial.cc
 
 test_factorial : factorial.o test_factorial.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -pthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -pthread $^ -o $@.out

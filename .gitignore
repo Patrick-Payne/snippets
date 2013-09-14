@@ -53,3 +53,6 @@ nosetests.xml
 # swap files
 *.swp
 
+# executables
+*.out
+

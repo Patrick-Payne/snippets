@@ -18,6 +18,21 @@
  *        to the left with no empty places.
  */
 void sortIntArray(int array[], int numElements) {
-// STUB
+  assert(numElements >= 0);
+
+  for (int i = 0; i < numElements; i++) {
+    // Get the leftmost unsorted element to insert into the sorted subarray.
+    int leftmost_unsorted_int = array[i];
+
+    // Shift all greater elements to the right to make room for the element.
+    int ins_index = i;
+    while ((leftmost_unsorted_int < array[ins_index - 1]) && ins_index > 0) {
+      array[ins_index] = array[ins_index - 1];
+      ins_index--;
+    }
+
+    // Put the element into its correct location.
+    array[ins_index] = leftmost_unsorted_int;
+  } /* for */
 }
 

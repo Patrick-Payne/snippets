@@ -8,6 +8,9 @@ CPPFLAGS += -I$(GTEST_DIR)/include/
 # Flags passed to the C++ compiler.
 CXXFLAGS += -g -Wall -Wextra
 
+# Flags passed to the C compiler.
+CCFLAGS += -g -Wall -Wextra -std=c99
+
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
 TESTS = test_insertion_sort_array.out
@@ -54,7 +57,7 @@ gtest_main.a : gtest-all.o gtest_main.o
 
 insertion_sort_array.o : $(USER_DIR)/insertion_sort_array.c \
 	                       $(USER_DIR)/insertion_sort_array.h $(GTEST_HEADERS)
-	$(CC) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/insertion_sort_array.c
+	$(CC) $(CPPFLAGS) $(CCFLAGS) -c $(USER_DIR)/insertion_sort_array.c
 
 test_insertion_sort_array.o : $(USER_DIR)/test_insertion_sort_array.cc \
                               $(USER_DIR)/insertion_sort_array.h \

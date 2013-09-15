@@ -18,4 +18,17 @@
 void SortIntArray(int array[], int num_elements);
 
 
+/*! @brief: Sorts an array of pointers in increasing order using a provided
+ *          comparison function.
+ *  @param: array The array of ints to be sorted.
+ *  @param: num_elements The number of elements in the array.
+ *  @param: greater_than A function returning true if its first input is
+ *          greater than its second input.
+ *  @pre: All elements from 0, ..., numElements are valid, i.e. array is packed
+ *        to the left with no empty places.
+ */
+void SortPointerArray(void *array[], int num_elements,
+                      int (*greater_than)(void *, void *));
+
+
 #endif /* SNIPPET_INSERTION_SORT_ARRAY_H_ */

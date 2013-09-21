@@ -27,7 +27,7 @@
  *    scripts);
  */
 typedef struct ArrayHeap {
-  int (*array)[];
+  int *array;
   int size;
   int capacity;
 } ArrayHeap;
@@ -118,4 +118,9 @@ int GetSize(ArrayHeap *heap);
  *  @return The maximum capacity of the heap.
  */
 int GetCapacity(ArrayHeap *heap);
+
+/*! @brief Prints out the values in the heap array.
+ *  @param heap A pointer to the ArrayHeap in question.
+ */
+void PrintHeap(ArrayHeap *heap);
 #endif /* SNIPPET_C_IN_PLACE_HEAP_H_ */

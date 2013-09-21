@@ -7,16 +7,12 @@
  *****************************************************************************/ 
 
 #include "insertion_sort_array.h"
-
 #include <assert.h>
 
+/******************************************************************************
+ * Public Function Definitions: See insertion_sort_array.h
+ *****************************************************************************/ 
 
-/*! @brief: Sorts an array of ints in increasing order.
- *  @param: array The array of ints to be sorted.
- *  @param: num_elements The number of elements in the array.
- *  @pre: All elements from 0, ..., numElements are valid, i.e. array is packed
- *        to the left with no empty places.
- */
 void SortIntArray(int array[], int num_elements) {
   assert(num_elements >= 0);
 
@@ -37,15 +33,6 @@ void SortIntArray(int array[], int num_elements) {
 }
 
 
-/*! @brief: Sorts an array of pointers in increasing order using a provided
- *          comparison function.
- *  @param: array The array of ints to be sorted.
- *  @param: num_elements The number of elements in the array.
- *  @param: greater_than A function returning true if its first input is
- *          greater than its second input.
- *  @pre: All elements from 0, ..., numElements are valid, i.e. array is packed
- *        to the left with no empty places.
- */
 void SortPointerArray(void *array[], int num_elements,
                       int (*greater_than)(void *, void *)) {
   assert(num_elements >= 0);

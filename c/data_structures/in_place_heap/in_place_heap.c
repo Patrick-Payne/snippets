@@ -10,15 +10,17 @@
 #include "in_place_heap.h"
 
 /******************************************************************************
- * Structs
+ * Macro Definitions
  *****************************************************************************/ 
 
-struct ArrayHeap {
-  int (*array)[];
-  int size;
-  int capacity;
-};
+/*! @brief Returns the index of the parent node for the item at index i. */
+#define PARENT(i) (((i) - 1) / 2)
 
+/*! @brief Returns the index of the left child of the node at index i. */
+#define LEFT_CHILD(i) ((2 * (i)) + 1)
+
+/*! @brief Returns the index of the right child of the node at index i. */
+#define RIGHT_CHILD(i) (2 * ((i) + 1))
 
 /******************************************************************************
  * Public Function Definitions
@@ -34,6 +36,10 @@ struct ArrayHeap {
  */
 ArrayHeap CreateArrayHeap(int *array, int capacity) {
   ArrayHeap new_heap;
+  new_heap.array = (int (*)[]) array;
+  new_heap.capacity = capacity;
+  new_heap.size = 0;
+
   return new_heap;
 }
 
@@ -50,6 +56,10 @@ ArrayHeap CreateArrayHeap(int *array, int capacity) {
  */
 ArrayHeap Heapify(int *array, int capacity, int size) {
   ArrayHeap new_heap;
+  new_heap.array = (int (*)[]) array;
+  new_heap.capacity = capacity;
+  new_heap.size = 0;
+
   return new_heap;
 }
 
@@ -106,6 +116,24 @@ int PopMin(ArrayHeap *heap) {
  */
 void InsertItem(ArrayHeap *heap, int new_item) {
   return;
+}
+
+
+/*! @brief Returns the size of a heap.
+ *  @param heap A pointer to the ArrayHeap in question.
+ *  @return The number of elements in the heap.
+ */
+int GetSize(ArrayHeap *heap) {
+  return heap->size;
+}
+
+
+/*! @brief Returns the maximum capacity of the heap.
+ *  @param heap A pointer to the ArrayHeap in question.
+ *  @return The maximum capacity of the heap.
+ */
+int GetCapacity(ArrayHeap *heap) {
+  return heap->capacity;
 }
 
 

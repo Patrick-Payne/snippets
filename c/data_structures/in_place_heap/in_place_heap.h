@@ -14,7 +14,24 @@
  * Type Declarations
  *****************************************************************************/ 
 
-typedef struct ArrayHeap ArrayHeap;
+/* @brief the structure used to contain the ArrayHeap.
+ * @details This implementation is slightly different from the conventional
+ *    one in that the root node is placed at index 0, rather than index 1.
+ *    This is less efficient, but makes it much easier to use this
+ *    implementation for an in-place heapsort. The left child of a node at
+ *    index i is given by 2i + 1, The right child by 2i + 2 = 2(i + 1).
+ *    The parent of a node at index i is given by (i - 1) / 2.
+ *
+ * @note This is declared here both to facilitate testing and due to
+ *    limitations when forward-declaring in C++ (which is used for the test
+ *    scripts);
+ */
+typedef struct ArrayHeap {
+  int (*array)[];
+  int size;
+  int capacity;
+} ArrayHeap;
+
 
 /******************************************************************************
  * Public Function Declarations
@@ -89,4 +106,16 @@ int PopMin(ArrayHeap *heap);
 void InsertItem(ArrayHeap *heap, int new_item);
 
 
+/*! @brief Returns the size of a heap.
+ *  @param heap A pointer to the ArrayHeap in question.
+ *  @return The number of elements in the heap.
+ */
+int GetSize(ArrayHeap *heap);
+
+
+/*! @brief Returns the maximum capacity of the heap.
+ *  @param heap A pointer to the ArrayHeap in question.
+ *  @return The maximum capacity of the heap.
+ */
+int GetCapacity(ArrayHeap *heap);
 #endif /* SNIPPET_C_IN_PLACE_HEAP_H_ */

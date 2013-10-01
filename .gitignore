@@ -56,3 +56,8 @@ nosetests.xml
 # executables
 *.out
 
+# Assembly programming things.
+*.elf
+*.srec
+*.ncf
+nios_macros.s

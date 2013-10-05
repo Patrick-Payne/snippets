@@ -50,16 +50,16 @@ static void InsertNodeAfter(Node *existing_node, Node *new_node);
 /*! @brief Create a new, empty list.
  *  @return The new list.
  */
-List CreateList(void) {
-  List new_list;
-  new_list.size = 0;
+List *CreateList(void) {
+  List *new_list = malloc(sizeof(List));
+  new_list->size = 0;
 
   // Link the dummy first to the dummy last node.
-  new_list.dummy_first.prev = NULL;
-  new_list.dummy_first.next = &(new_list.dummy_last);
+  new_list->dummy_first.prev = NULL;
+  new_list->dummy_first.next = &(new_list->dummy_last);
 
-  new_list.dummy_last.next = NULL;
-  new_list.dummy_last.prev = &(new_list.dummy_first);
+  new_list->dummy_last.next = NULL;
+  new_list->dummy_last.prev = &(new_list->dummy_first);
 
   return new_list;
 }
@@ -71,10 +71,14 @@ List CreateList(void) {
 void DeleteList(List *list) {
   assert(list != NULL);
 
+  // Free the memory associated with individual nodes.
   while (list->size > 0) {
     int dummy_item;
     PopFirstItem(list, &dummy_item);
   }
+
+  // Now free the memory associated with the list struct itself.
+  free(list);
 }
 
 

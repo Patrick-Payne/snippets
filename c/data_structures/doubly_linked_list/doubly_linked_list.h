@@ -37,7 +37,7 @@ typedef struct List {
 /*! @brief Create a new, empty list.
  *  @return The new list.
  */
-List CreateList(void);
+List *CreateList(void);
 
 
 /*! @brief Deletes a list, freeing all heap memory associated with it.

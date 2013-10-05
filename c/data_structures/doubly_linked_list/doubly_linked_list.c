@@ -239,7 +239,9 @@ static void DeleteNode(Node *node) {
   // Update the pointers of the previous and/or next nodes, if they exist.
   if (node->prev != NULL) {
     node->prev->next = node->next;
-  } else if (node->next != NULL) {
+  }
+
+  if (node->next != NULL) {
     node->next->prev = node->prev;
   }
 

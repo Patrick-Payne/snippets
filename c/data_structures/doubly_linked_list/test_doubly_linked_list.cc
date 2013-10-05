@@ -9,3 +9,16 @@
 }
 
 #include "gtest/gtest.h"
+
+/******************************************************************************
+ * TEST BASIC LINKED LIST FUNCTIONALITY:
+ *****************************************************************************/ 
+
+TEST(BasicFunctionality, CreateAndDestroy) {
+  List *test_list = CreateList();
+  EXPECT_EQ(0, test_list->size);
+  EXPECT_EQ(NULL, test_list->dummy_first.prev);
+  EXPECT_EQ(NULL, test_list->dummy_last.next);
+  EXPECT_EQ(&(test_list->dummy_first), test_list->dummy_last.prev);
+  EXPECT_EQ(&(test_list->dummy_last), test_list->dummy_first.next);
+}

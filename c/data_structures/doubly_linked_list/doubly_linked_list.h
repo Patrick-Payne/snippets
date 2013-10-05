@@ -34,6 +34,18 @@ typedef struct List {
  * PUBLIC FUNCTION DECLARATIONS:
  *****************************************************************************/ 
 
+/*! @brief Create a new, empty list.
+ *  @return The new list.
+ */
+List CreateList(void);
+
+
+/*! @brief Deletes a list, freeing all heap memory associated with it.
+ *  @param list The list to be deleted.
+ */
+void DeleteList(List *list);
+
+
 /*! @brief Adds an integer element to the beginning of the linked list.
  *  @param list A pointer to the list in question.
  *  @param new_item The integer to be inserted into the list.
@@ -62,6 +74,15 @@ bool PopFirstItem(List *list, int *item);
  *  @return false if the list was empty, true otherwise.
  */
 bool PopLastItem(List *list, int *item);
+
+
+/*! @brief Returns the value of the specified item in the list.
+ *  @param list A pointer to the list in question.
+ *  @param index The index of the item in the list.
+ *  @param item A pointer to the location to store the item.
+ *  @return true if an item exists at that index, false otherwise.
+ */
+bool GetItem(List *list, int index, int *item);
 
 
 /*! @brief Removes the first item in the list with the specified value.

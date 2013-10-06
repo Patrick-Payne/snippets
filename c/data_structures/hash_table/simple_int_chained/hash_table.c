@@ -10,3 +10,58 @@
 
 #include <assert.h>
 #include <stdlib.h>
+
+
+/******************************************************************************
+ * PUBLIC FUNCTION DEFINITIONS:
+ *****************************************************************************/ 
+
+/*! @brief Initializes and returns a new hash table of a specified size.
+ *  @param num_slots The number of slots the new dictionary should have.
+ *  @return A new hash table, allocated from the free store.
+ */
+HashTable HashCreate(int num_slots) {
+  HashTable new_table;
+  new_table.table = NULL;
+  new_table.num_slots = 0;
+  new_table.num_elements = 0;
+  return new_table;
+}
+
+
+/*! @brief Frees all heap memory allocated for the member variables of a hash
+ *     table.
+ *  @param hash_table The hash table to destroy.
+ */
+void HashDestroy(HashTable *hash_table) {
+}
+
+
+/*! @brief Inserts an integer into an existing hash table.
+ *  @param hash_table The hash table to insert into.
+ *  @param item The integer to add to the hash table.
+ */
+void HashInsert(HashTable *hash_table, int item) {
+}
+
+
+/*! @brief Check if an integer is in a hash table.
+ *  @param hash_table The hash table to insert into.
+ *  @param item The item to look for.
+ *  @return true if the item is in the hash table, false otherwise.
+ */
+bool HashSearch(HashTable *hash_table, int item) {
+  return true;
+}
+
+
+/*! @brief Inserts an integer into an existing hash table.
+ *  @param hash_table The hash table to insert into.
+ *  @param item The integer item to be deleted.
+ *  @return true if the item was in the list and deleted, false otherwise.
+ */
+bool HashDelete(HashTable *hash_table, int item) {
+  return true;
+}
+
+

@@ -21,11 +21,10 @@ TEST(BasicFunctionality, CreateDestroy) {
   HashTable test_table = HashCreate(22);
   EXPECT_EQ(22, test_table.num_slots);
   EXPECT_EQ(0, test_table.num_elements);
-  ASSERT_NE(NULL, test_table.table);
 
   // All of the table elements should have been initialized to NULL.
   for (int i = 0; i < 22; i++) {
-    EXPECT_EQ(NULL, test_table.table[i]);
+    ASSERT_EQ(NULL, test_table.table[i]);
   }
 
   // Now destroy the list, and make sure the table was set to NULL.

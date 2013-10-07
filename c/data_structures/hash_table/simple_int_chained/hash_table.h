@@ -26,7 +26,7 @@ typedef struct Node {
 /*! @brief This is the structure used to hold hash tables.
  */
 typedef struct HashTable {
-  Node *table;
+  Node **table;
   int num_slots;
   int num_elements;
 } HashTable;

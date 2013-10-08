@@ -25,14 +25,11 @@ def get_shortest_path(graph, start, end):
     node_fifo = deque()
     node_fifo.append(start)
 
-    # Create a set that contains all nodes that have been discovered.
-    found_nodes = {start}
-
     # Create a dict to contain the Breadth-First tree produced by the search.
     # This is created by specifying the unique parent of each node in the tree
     # as a value in a dict. None is a sentinal value used for the parent of the
     # root node.
-    parent = {start: None}
+    tree = {start: None}
 
     # This is the main body of the breadth-first search.
     while len(node_fifo) > 0:
@@ -40,9 +37,8 @@ def get_shortest_path(graph, start, end):
 
         # Add all newly discovered nodes adjacent to the current node.
         for node in graph[current_node]:
-            if node not in found_nodes:
-                found_nodes.add(node)
-                parent[node] = current_node
+            if node not in tree:
+                tree[node] = current_node
                 node_fifo.append(node)
 
             # We short-circuit the search if we find the end vertex.
@@ -52,12 +48,12 @@ def get_shortest_path(graph, start, end):
                 break
 
     # We have exited the loop; see if we have found the end vertex.
-    if end in found_nodes:
+    if end in tree:
         path = []
         node = end
         while node is not None:
             path.append(node)
-            node = parent[node]
+            node = tree[node]
 
         # The current path is from end to start, so reverse it.
         path.reverse()

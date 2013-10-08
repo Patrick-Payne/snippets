@@ -28,6 +28,15 @@
 /******************************************************************************
  * Private Function Declarations
  *****************************************************************************/ 
+/*! @brief Returns the index of the largest child of the node at index.
+ *  @param heap The heap in question.
+ *  @param index The index of the current node.
+ *  @return The index of the larger child. If it is beyond the size of the
+ *    heap, this means that there are no valid children.
+ */
+static int MaxChild(const ArrayHeap *heap, int index);
+
+
 /*! @brief Percolates the root item down the heap to restore the heap property.
  *  @param heap The ArrayHeap in question.
  */
@@ -74,7 +83,7 @@ ArrayHeap Heapify(int *array, int capacity, int size) {
   ArrayHeap new_heap;
   new_heap.array = array;
   new_heap.capacity = capacity;
-  new_heap.size = 0;
+  new_heap.size = size;
 
   return new_heap;
 }
@@ -220,31 +229,37 @@ void PrintHeap(ArrayHeap *heap)
  * Private Function Definitions
  *****************************************************************************/ 
 
+/*! @brief Returns the index of the largest child of the node at index.
+ *  @param heap The heap in question.
+ *  @param index The index of the current node.
+ *  @return The index of the larger child. If it is beyond the size of the
+ *    heap, this means that there are no valid children.
+ */
+static int MaxChild(const ArrayHeap *heap, int index) {
+  if ((RIGHT(index) >= heap->size) ||
+      (heap->array[RIGHT(index)] <= heap->array[LEFT(index)])) {
+    return LEFT(index);
+  } else {
+    return RIGHT(index);
+  }
+}
+
+
 /*! @brief Percolates the root item down the heap to restore the heap property.
  *  @param heap The ArrayHeap in question.
  */
 static void PercolateDown(ArrayHeap *heap) {
   assert(heap != NULL);
+  int *array = heap->array;
 
   // The root of this heap implementation is at index zero.
-  int i = 0;
-  int *array = heap->array;
-  int last_index = heap->size - 1;
-
-  // Keep percolating down until the heap property is satisfied. We make sure
-  // to check if the node even has a left or right child before comparing.
-  while ((LEFT(i) <= last_index && array[i] < array[LEFT(i)]) ||
-         (RIGHT(i) <= last_index && array[i] < array[RIGHT(i)])) {
-    if (RIGHT(i) <= last_index && array[RIGHT(i)] > array[LEFT(i)]) {
-      // The right child is greater than both the left child and parent nodes.
-      SwapNodes(heap, i, RIGHT(i));
-      i = RIGHT(i);
-    } else {
-      // The left child is greater than both the right child and parent nodes.
-      SwapNodes(heap, i, LEFT(i));
-      i = LEFT(i);
-    }
-  } /* WHILE */
+  int current = 0;
+  int child = MaxChild(heap, current);
+  while ((child <= heap->size -1) && (array[child] > array[current])) {
+    SwapNodes(heap, current, child);
+    current = child;
+    child = MaxChild(heap, child);
+  }
 }
 
 

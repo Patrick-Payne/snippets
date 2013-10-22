@@ -50,8 +50,9 @@ nosetests.xml
 .project
 .pydevproject
 
-# swap files
+# Vim stuff.
 *.swp
+*~
 
 # executables
 *.out
@@ -61,5 +62,3 @@ nosetests.xml
 *.srec
 *.ncf
 nios_macros.s
-
-# Verilog stuff.

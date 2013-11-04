@@ -13,7 +13,7 @@
  * Public Function Definitions: See insertion_sort_array.h
  *****************************************************************************/ 
 
-void SortIntArray(int array[], int num_elements) {
+void InsertionSort(int array[], int num_elements) {
   assert(num_elements >= 0);
 
   for (int i = 0; i < num_elements; i++) {
@@ -22,7 +22,7 @@ void SortIntArray(int array[], int num_elements) {
 
     // Shift all greater elements to the right to make room for the element.
     int ins_index = i;
-    while ((leftmost_unsorted_int < array[ins_index - 1]) && ins_index > 0) {
+    while (ins_index > 0 && (leftmost_unsorted_int < array[ins_index - 1])) {
       array[ins_index] = array[ins_index - 1];
       ins_index--;
     }

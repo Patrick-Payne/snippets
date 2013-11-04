@@ -21,9 +21,9 @@ int IntGreaterThan(void *a, void *b) {
  * Test sort_int_array()
  *****************************************************************************/ 
 // Test case where list is already sorted.
-TEST(SortIntArrayTest, Sorted) {
+TEST(InsertionSortTest, Sorted) {
   int test_array[] = {0, 1, 2, 3, 4, 5};
-  SortIntArray(test_array, 6);
+  InsertionSort(test_array, 6);
 
   EXPECT_EQ(test_array[0], 0);
   EXPECT_EQ(test_array[1], 1);
@@ -34,9 +34,9 @@ TEST(SortIntArrayTest, Sorted) {
 }
 
 // Test case where there is only one mismatch.
-TEST(SortIntArrayTest, OneMismatch) {
+TEST(InsertionSortTest, OneMismatch) {
   int test_array[] = {0, 1, 3, 2, 4, 5};
-  SortIntArray(test_array, 6);
+  InsertionSort(test_array, 6);
 
   EXPECT_EQ(test_array[0], 0);
   EXPECT_EQ(test_array[1], 1);
@@ -47,9 +47,9 @@ TEST(SortIntArrayTest, OneMismatch) {
 }
 
 // Test case where we have reverse order
-TEST(SortIntArrayTest, ReverseSort) {
+TEST(InsertionSortTest, ReverseSort) {
   int test_array[] = {5, 4, 3, 2, 1, 0};
-  SortIntArray(test_array, 6);
+  InsertionSort(test_array, 6);
 
   EXPECT_EQ(test_array[0], 0);
   EXPECT_EQ(test_array[1], 1);

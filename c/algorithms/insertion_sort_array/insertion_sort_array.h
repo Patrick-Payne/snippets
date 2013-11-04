@@ -15,7 +15,7 @@
  *  @pre: All elements from 0, ..., numElements are valid, i.e. array is packed
  *        to the left with no empty places.
  */
-void SortIntArray(int array[], int num_elements);
+void InsertionSort(int array[], int num_elements);
 
 
 /*! @brief: Sorts an array of pointers in increasing order using a provided

@@ -1,0 +1,9 @@
+Tue Sep 23 21:51:55 EDT 2014
+- Lessons learned:
+  - Try to do changes more incrementally, so that number of compile errors is
+    more manageable.
+  - Make sure that any API changes are propagated fully.
+  - Always use brackets to make things 100% clear.
+  - Make sure to use = and == correctly.
+  - Make sure to use . and -> correctly for structs and pointers.
+  - Make sure tree->size gets updated properly.

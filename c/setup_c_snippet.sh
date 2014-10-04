@@ -1,24 +1,32 @@
 #!/bin/sh
 # This script generates a new C project, complete with google test program code
 # and makefile.
-# USAGE: ./setup_c_snippet.sh PROJECT_NAME
+# USAGE: ./setup_c_snippet.sh TYPE PROJECT_NAME
 
-PROJECT_NAME=$1
+SUBDIR_NAME=$1
+PROJECT_NAME=$2
+PROJECT_DIR="$1/$2"
 ALL_CAPS_PROJECT_NAME=$(echo "$PROJECT_NAME" | tr 'a-z' 'A-Z')
 DATE=$(date)
 
 # Do some basic validation on the input.
 if [ -z "$PROJECT_NAME" ]; then
   echo "No project name was provided!"
-  echo "Usage: $0 {PROJECT_NAME}"
+  echo "Usage: $0 PROJECT_TYPE PROJECT_NAME"
   exit 1
 fi
 
-if [ -e "$PROJECT_NAME" ]; then
-  if [ -d "$PROJECT_NAME" ]; then
-    echo "The directory $PROJECT_NAME already exists!"
+if [ -z "$PROJECT_NAME" ]; then
+  echo "No snippet type was was provided!"
+  echo "Usage: $0 PROJECT_TYPE PROJECT_NAME"
+  exit 1
+fi
+
+if [ -e "$PROJECT_DIR" ]; then
+  if [ -d "$PROJECT_DIR" ]; then
+    echo "The directory $PROJECT_DIR already exists!"
   else
-    echo "A file called $PROJECT_NAME already exists!"
+    echo "A file called $PROJECT_DIR already exists!"
   fi
 
   exit 1
@@ -26,10 +34,10 @@ fi
 
 
 # Now we generate the files.
-mkdir -p "$PROJECT_NAME"
+mkdir -p "$PROJECT_DIR"
 
 # Generate the makefile.
-cat << _EOF_ > "${PROJECT_NAME}/Makefile"
+cat << _EOF_ > "${PROJECT_DIR}/Makefile"
 USER_DIR = .
 CPPFLAGS += -I\$(GTEST_DIR)/include/
 CXXFLAGS += -g -Wall -Wextra
@@ -79,7 +87,7 @@ test_${PROJECT_NAME}.out : ${PROJECT_NAME}.o \\
 _EOF_
 
 # Generate the Header file.
-cat << _EOF_ > "${PROJECT_NAME}/${PROJECT_NAME}.h"
+cat << _EOF_ > "${PROJECT_DIR}/${PROJECT_NAME}.h"
 /******************************************************************************
  * File: ${PROJECT_NAME}.h
  * Author: Patrick Payne
@@ -94,7 +102,7 @@ cat << _EOF_ > "${PROJECT_NAME}/${PROJECT_NAME}.h"
 _EOF_
 
 # Generate the C implementation file.
-cat << _EOF_ > "${PROJECT_NAME}/${PROJECT_NAME}.c"
+cat << _EOF_ > "${PROJECT_DIR}/${PROJECT_NAME}.c"
 /******************************************************************************
  * File: ${PROJECT_NAME}.c
  * Author: Patrick Payne
@@ -106,7 +114,7 @@ cat << _EOF_ > "${PROJECT_NAME}/${PROJECT_NAME}.c"
 _EOF_
 
 # Generate the c++ test code file.
-cat << _EOF_ > "${PROJECT_NAME}/test_${PROJECT_NAME}.cc"
+cat << _EOF_ > "${PROJECT_DIR}/test_${PROJECT_NAME}.cc"
 /******************************************************************************
  * File: test_${PROJECT_NAME}.cc
  * Author: Patrick Payne
@@ -114,6 +122,7 @@ cat << _EOF_ > "${PROJECT_NAME}/test_${PROJECT_NAME}.cc"
  * Purpose:
  * Copyright ${DATE} by Patrick Payne.
  *****************************************************************************/
+
 extern "C" {
 #include "${PROJECT_NAME}.h"
 }

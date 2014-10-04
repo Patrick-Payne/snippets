@@ -12,12 +12,12 @@ DATE=$(date)
 # Do some basic validation on the input.
 if [ -z "$PROJECT_NAME" ]; then
   echo "No project name was provided!"
-  echo "Usage: $0 {SNIPPET_TYPE}{PROJECT_NAME}"
+  echo "Usage: $0 SNIPPET_TYPE PROJECT_NAME"
   exit 1
 fi
 if [ -z "$SUBDIR_NAME" ]; then
   echo "No snippet type was provided!"
-  echo "Usage: $0 {SNIPPET_TYPE}{PROJECT_NAME}"
+  echo "Usage: $0 SNIPPET_TYPE PROJECT_NAME"
   exit 1
 fi
 
@@ -120,10 +120,8 @@ cat << _EOF_ > "${PROJECT_DIR}/test_${PROJECT_NAME}.cc"
  * Purpose:
  * Copyright ${DATE} by Patrick Payne.
  *****************************************************************************/
-extern "C" {
-#include "${PROJECT_NAME}.h"
-}
 
+#include "${PROJECT_NAME}.h"
 #include "gtest/gtest.h"
 
 /******************************************************************************

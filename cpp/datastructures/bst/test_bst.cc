@@ -69,11 +69,12 @@ TEST(BST, TEST_MIN_MAX) {
   tree.insert(-3);
   tree.insert(-1);
 
-  int min, max;
+  int min, max, med;
   ASSERT_TRUE(tree.min(&min));
   ASSERT_TRUE(tree.max(&max));
-  // ASSERT_TRUE(tree.min(&med));
+  ASSERT_TRUE(tree.median(&med));
 
   ASSERT_EQ(-3, min);
   ASSERT_EQ(3, max);
+  ASSERT_EQ(-1, med);
 }

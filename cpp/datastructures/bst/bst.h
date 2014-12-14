@@ -48,7 +48,7 @@ public:
   /*! Set max_out to the greatest member of the BST. Return true if successful.*/
   bool max(T *max_out);
 
-  /*! Set med_out to the median of the BST. Return true if successful.*/
+  /*! Set med_out to the lower median of the BST. Return true if successful.*/
   bool median(T *med_out);
 
   /* Sum up all of the nodes in a BST, and return this sum. */
@@ -67,6 +67,8 @@ private:
   void free_nodes(Node<T> *root);
 
   bool recursive_insert_value(Node<T> *root, T value);
+
+  bool get_ith_node(Node<T> *root, int *num_remaining, Node<T> **item);
 
   Node<T> *m_root;
   size_t m_size;
@@ -195,7 +197,15 @@ bool BinaryTree<T>::max(T *max_out) {
 
 template<class T>
 bool BinaryTree<T>::median(T *med_out) {
-  return false;
+  if (size() == 0) {
+    return false;
+  }
+
+  Node<T> *result_node = NULL;
+  int num_remaining = (size() + 1) / 2;
+  assert(get_ith_node(m_root, &num_remaining, &result_node));
+  *med_out = result_node->value;
+  return true;
 }
 
 
@@ -328,6 +338,29 @@ void BinaryTree<T>::recursive_print_tree(Node<T> *root) {
   recursive_print_tree(root->left);
   printf("derp");
   recursive_print_tree(root->right);
+}
+
+/*! Gets the ith smallest item in the BST. */
+template<class T>
+bool BinaryTree<T>::get_ith_node(Node<T> *root, int *num_remaining, Node<T> **item) {
+  if (root == NULL) {
+    return false;
+  }
+
+  bool found_in_left = get_ith_node(root->left, num_remaining, item);
+  if (found_in_left) {
+    return true;
+  }
+
+  (*num_remaining)--;
+  if (*num_remaining == 0) {
+    *item = root;
+    return true;
+  }
+
+  bool found_in_right = get_ith_node(root->right, num_remaining, item);
+  assert(found_in_right);
+  return true;
 }
 
 #endif /* SNIPPET_C_BST_H_ */

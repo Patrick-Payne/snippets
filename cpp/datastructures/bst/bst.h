@@ -51,6 +51,9 @@ public:
   /*! Set med_out to the lower median of the BST. Return true if successful.*/
   bool median(T *med_out);
 
+  /*! Set deepest_out to the value in the deepest node of the tree. */
+  bool deepest(T *deepest_out);
+
   /* Sum up all of the nodes in a BST, and return this sum. */
   T sum_nodes(Node<T> *root);
 
@@ -69,6 +72,8 @@ private:
   bool recursive_insert_value(Node<T> *root, T value);
 
   bool get_ith_node(Node<T> *root, int *num_remaining, Node<T> **item);
+
+  size_t get_deepest_node(Node<T> *root, Node<T> **deepest_node);
 
   Node<T> *m_root;
   size_t m_size;
@@ -206,6 +211,19 @@ bool BinaryTree<T>::median(T *med_out) {
   assert(get_ith_node(m_root, &num_remaining, &result_node));
   *med_out = result_node->value;
   return true;
+}
+
+template<class T>
+bool BinaryTree<T>::deepest(T *deepest_out) {
+  Node<T> *deepest_node = NULL;
+  size_t depth = get_deepest_node(m_root, &deepest_node);
+  if (depth == 0) {
+    return false;
+  } else {
+    assert(deepest_node != NULL);
+    *deepest_out = deepest_node->value;
+    return true;
+  }
 }
 
 
@@ -361,6 +379,28 @@ bool BinaryTree<T>::get_ith_node(Node<T> *root, int *num_remaining, Node<T> **it
   bool found_in_right = get_ith_node(root->right, num_remaining, item);
   assert(found_in_right);
   return true;
+}
+
+template<class T>
+size_t BinaryTree<T>::get_deepest_node(Node<T> *root, Node<T> **deepest_node) {
+  if (root == NULL) {
+    return 0;
+  }
+
+  Node<T> *left_deepest, *right_deepest;
+  size_t left_depth = get_deepest_node(root->left, &left_deepest);
+  size_t right_depth = get_deepest_node(root->right, &right_deepest);
+
+  if (left_depth == 0 && right_depth == 0) {
+    *deepest_node = root;
+    return 1;
+  } else if (right_depth >= left_depth) {
+    *deepest_node = right_deepest;
+    return right_depth + 1;
+  } else {
+    *deepest_node = left_deepest;
+    return left_depth + 1;
+  }
 }
 
 #endif /* SNIPPET_C_BST_H_ */

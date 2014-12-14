@@ -78,3 +78,13 @@ TEST(BST, TEST_MIN_MAX) {
   ASSERT_EQ(3, max);
   ASSERT_EQ(-1, med);
 }
+
+TEST(BST, GET_DEEPEST) {
+  BinaryTree<int> tree;
+  int deepest;
+  ASSERT_FALSE(tree.deepest(&deepest));
+
+  tree.insert(1);
+  ASSERT_TRUE(tree.deepest(&deepest));
+  ASSERT_EQ(1, deepest);
+}
